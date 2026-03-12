@@ -1,0 +1,170 @@
+{% extends 'nav.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/game.css' %}" />
+    <title>game page</title>
+</head>
+
+<style>
+    body{
+        background: linear-gradient(135deg, #134e5e, #71b280);
+    }
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .row1{
+        width: 50%;
+    }
+
+    .box-element {
+        /* box-shadow: hsl(0, 0%, 80%) 0 0 16px; */
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .table th{
+        font-size: 30px;
+    }
+    .row3{
+        width: 70%; 
+        height: max-content;
+    }
+     table{
+        width: stretch;
+    }
+    @media only screen and (min-width:300px) and (max-width:870px){
+            .row1{
+                width: 90%;
+            }
+            form{
+                width: 90%;
+            }
+            h1 {
+    font-size: 25px;
+        }
+        h3 {
+    font-size: 19px;
+}   
+    h4{
+        font-size: 15px;
+    }
+    .row3 {
+                width: 95%;
+            }
+    .table th {
+        font-size: 15px;
+    }
+    table{
+        width: stretch;
+    }
+    }
+</style>
+
+<body>
+
+    
+    <div class="row">
+        <div class="row1" >
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'main' %}">&#x2190;Back</a>
+
+                <br>
+                <br>
+
+                <table class="">
+                    <h3>Game instruction</h3>
+                    <hr>
+                    <tr>
+                        <th>
+                            <h4><span style="color: crimson;">*</span><br> correct number</h4>
+                        </th>
+                        <th>
+                            <h4><span style="color: rgb(33, 220, 20);">#</span><br> wrong position</h4>
+                        </th>
+                        <th>
+                            <h4><strong><span style="color: rgb(20, 27, 220);">_</span></strong> <br>wrong number </h4>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="box-element">
+
+                <div class="cart-row">
+                        <h1>hint : </h1>
+                    <div
+                        style="margin:auto; width: 25%;font-size: 28px;text-align: center; height:max-content;border: 1px solid rgb(70, 68, 68);padding: 5px;">
+                       <h1> {{table.hint}}</h1></div>
+
+                </div><br><br>
+
+
+                <div class="cart-row col-lg-12 text-center">
+                    <form method="POST" action="{% url 'game_page' %}">
+                    {% csrf_token %}
+                    <h3><strong class="text-center;">guess 4 digit number (1-9)</strong></h3><br> <br>
+                    <input style="width: 70%; padding: 22px; border-radius: 10px; border: 1px solid grey; text-align: center;
+                        " type="text" name="code" placeholder="4 digit enter this"><br><br>
+
+                    <button onclick="demo()" type="submit" style="width: 200px; padding: 15px;"
+                        class="btn btn-outline-primary add-btn update-cart">CHECK</button><br>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+        <br><br>
+        <div class="row3" >
+            <div class="col-lg-12">
+                <div class="box-element">
+
+
+                    <table class="table">
+                        <tr>
+                            
+                            <th> output</th>
+                            <th> Guess</th>
+                            <th> status </th>
+                        </tr>
+
+                        {% if table %}
+                        <tr>
+
+                           
+                            <th> {{table.hint}}</th>
+                            <th> {{ table.guess}}</th>
+                            <th id="status"> {{table.status}} </th>
+
+
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+
+                <br>
+
+                
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+     
+
+
+</body>
+
+{% endblock content %}

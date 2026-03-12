@@ -1,0 +1,259 @@
+
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tournament lists</title>
+</head>
+<style>
+    /* * { margin: 0; padding: 0; box-sizing: border-box; } */
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      min-height:100vh;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 780px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Header ── */
+    .card-header {
+      background: #2575fc;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-header .icon {
+      font-size: 1.6rem;
+    }
+
+    .card-header h2 {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    /* ── Body ── */
+    .card-body {
+      padding: 36px 32px 32px;
+      text-align: center;
+    }
+
+    /* Digit tiles */
+    .digit-tiles {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: #4a90e2;
+      border-radius: 16px;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(74,144,226,0.4);
+    }
+
+    .digit-tiles span {
+      background: #fff;
+      color: #2575fc;
+      font-size: 1.6rem;
+      font-weight: 800;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .card-body h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 28px;
+    }
+
+    /* How to Play */
+    .how-to-play {
+      text-align: left;
+      margin-bottom: 32px;
+      
+    }
+
+    .how-to-play h4 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 14px;
+    }
+
+    .how-to-play ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .how-to-play ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 20px;
+      color: #444;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .how-to-play ul li::before {
+      content: '•';
+      color: #2575fc;
+      font-size: 1.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* Play Button */
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 8px 24px rgba(37,117,252,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(37,117,252,0.5);
+    }
+
+    .play-btn:active {
+      transform: translateY(0);
+    }
+
+    .play-btn .triangle {
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 12px solid #fff;
+      flex-shrink: 0;
+    }
+
+    /* Coins badge in navbar (top right — shown in screenshot) */
+    .coins-badge {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      background: #f5a623;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(245,166,35,0.4);
+    }
+     @media only screen and  (min-width: 600px) and (max-width:768px){
+        
+        .card{
+            width: 90%;
+        }
+        .play-btn{
+            padding: 16px 4px;
+        }
+        
+    }
+     @media only screen and  (min-width: 300px) and (max-width:600px){
+         .play-btn{
+            padding: 15px 4px;
+            padding: 16px 20px;
+            font-size: 13px;
+            width: 63%;
+        }
+        .card-body {
+    padding: 20px 0px 24px;
+        }
+     }
+  </style>
+</head>
+<body>
+
+  <!-- Coins badge (top right) -->
+  <div class="coins-badge">🪙 {{ coins }}</div>
+
+  <!-- Game Card -->
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <span class="icon" >🧠</span>
+      <h2 class="icon" >Number Game</h2>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+      <!-- Digit tiles -->
+      <div class="digit-tiles">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </div>
+
+      <h3>Guess the 4-digit number</h3>
+
+      <!-- How to Play -->
+      <div class="how-to-play" >
+        <h4>How to Play:</h4>
+        <ul>
+          <li>Guess the 4-digit secret number</li>
+          <li>Get clues: * = correct position, # = wrong position, _ = not in number</li>
+          <li>Try to guess in as few attempts as possible</li>
+          <li>Win and get bonus coins!</li>
+        </ul>
+      </div>
+
+      <!-- Play Button -->
+      <a href="{% url 'game_page' %}" class="play-btn">
+        <span class="triangle"></span>
+        Play Now - 200 Coins
+      </a>
+
+    </div>
+  </div>
+  </body>
+{% endblock content %}
+</html>

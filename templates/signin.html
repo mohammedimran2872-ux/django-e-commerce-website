@@ -1,0 +1,108 @@
+
+<!doctype html>
+<html>
+    <head>
+        <title>signin</title>
+        <script src="https://kit.fontawesome.com/c0079a392f.js" crossorigin="anonymous"></script>
+        <style>
+            .bod{
+                background-color: antiquewhite;
+            }
+            .contain{
+                width: 30%;
+                background-color: white;
+                padding:20px 50px;
+                margin:auto;
+            
+                box-sizing: border-box;
+            }
+            h1, h3{
+               margin: 0%; 
+               text-align: center;
+            }
+            h3{
+                padding: 6px 50px;
+            }
+            input{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+                border-radius: 9px;  
+                background-color: beige; 
+                margin-bottom: 15px; 
+            }
+            input::placeholder{
+                
+                color:grey;
+            }
+            label{
+                float: right;
+            }
+            .btn{
+                color:white;
+                background-color:darkorange;
+                padding:10px;
+                width:100%;
+                font-size:18px;
+                border:none;
+                border-radius: 5px;
+            }
+            p{text-align: center; margin-top: 21px;}
+            i{
+                padding:11px 15px;
+                border-radius: 10px;
+                font-size: 23px;  
+            }
+            .btn2{
+                border-radius: 10px;
+                margin-left: 18px;
+                background-color: white;
+            }
+            .mar{
+                margin-left: 39px;
+            }
+            .ggl{
+                color:cadetblue;
+            }
+            .git{color: aqua;}
+            .face{color: blue;}
+            .register{color: coral;}
+            </style>
+    </head>
+        <body class="bod">
+           
+             <form class="contain" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+               <h1>Hello Again</h1>
+               <h3>Welcome back you've been missed !</h3><br/>
+               <input type="text" placeholder="Enter username" name="username"/><br>
+               <input type="password" placeholder="enter the password.." name="password"/><br>
+               <label>Recover Passsword</label><br><br>
+               <button type="submit" class="btn">Sign in</button>
+               <!-- <p>------ Or continue with------</p> -->
+               <!-- <button class="btn2 mar"><i class="fa-brands fa-google ggl"></i></button>
+               <button class="btn2"><i class="fa-brands fa-gitkraken git"></i></button>
+               <button class="btn2"><i class="fa-brands fa-facebook face"></i></button> -->
+               <P>Not a member? <a href="/" class="register">Register Now</a></P>
+
+                {% if error %}
+                <div id="error-message" style="color: red;">{{ error }}</div>
+            {% endif %}
+            </form>
+
+
+
+
+
+
+            <script>
+                
+        window.onload = function() {
+            const errorDiv = document.getElementById('error-message');
+            if (errorDiv) {
+                alert(errorDiv.textContent);
+            }
+        };
+            </script>
+        </body>
+    </html>
